@@ -1,23 +1,13 @@
 import React from 'react';
-import { StatusBar } from 'expo-status-bar';
-import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { Router } from './src/routes/Router';
+import { AuthProvider } from './src/contexts/Auth';
 
-import useCachedResources from './src/hooks/useCachedResources';
-import useColorScheme from './src/hooks/useColorScheme';
-import Navigation from './src/navigation';
+const App = () => {
+	return (
+		<AuthProvider>
+			<Router />
+		</AuthProvider>
+	);
+};
 
-export default function App() {
-	const isLoadingComplete = useCachedResources();
-	const colorScheme = useColorScheme();
-
-	if (!isLoadingComplete) {
-		return null;
-	} else {
-		return (
-			<SafeAreaProvider>
-				<Navigation colorScheme={colorScheme} />
-				<StatusBar />
-			</SafeAreaProvider>
-		);
-	}
-}
+export default App;
